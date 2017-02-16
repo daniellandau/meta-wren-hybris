@@ -18,7 +18,6 @@ SRC_URI = "git://android.googlesource.com/kernel/msm;branch=android-msm-sparrow-
     file://0001-msm-mdss-mdp-Don-t-use-tracing-features.patch \
     file://0001-Makefile-patch-fixes-ASUS_SW_VER-error.patch \
     file://0001-Backport-mainline-4.1-Bluetooth-subsystem.patch \
-    file://0002-bluesleep-Use-kernel-s-HCI-events-instead-of-proc-bl.patch \
     file://defconfig \
     file://img_info "
 SRCREV = "3d2fa521411917b5a1683fec42ad2a8e50aee79f"
