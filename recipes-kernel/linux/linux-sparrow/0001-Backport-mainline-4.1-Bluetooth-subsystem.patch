@@ -247,36 +247,6 @@ index a07081e..e7ed276 100644
  	  chipsets are supported.
  
  	  Say Y here to compile support for Marvell BT-over-SDIO driver
-@@ -244,18 +286,18 @@ config BT_WILINK
- 	  into the kernel or say M to compile it as module.
- 
- config MSM_BT_POWER
--	tristate "MSM Bluetooth Power Control"
--	depends on ARCH_MSM && RFKILL
--	default m
--	help
--	  Provides a parameter to switch on/off power from PMIC
--	  to Bluetooth device.
-+       tristate "MSM Bluetooth Power Control"
-+       depends on ARCH_MSM && RFKILL
-+       default m
-+       help
-+         Provides a parameter to switch on/off power from PMIC
-+         to Bluetooth device.
- 
- config MSM_BT_SLEEP
--	tristate "MSM Bluesleep driver"
--	depends on BT && SERIAL_MSM_HS
--	help
--	  Bluetooth MSM bluesleep driver.
--	  This driver provides support for BT sleep.
-+       tristate "MSM Bluesleep driver"
-+       depends on BT && SERIAL_MSM_HS
-+       help
-+         Bluetooth MSM bluesleep driver.
-+         This driver provides support for BT sleep.
- 
- endmenu
 diff --git a/drivers/bluetooth/Makefile b/drivers/bluetooth/Makefile
 index 310da84..775f35d 100644
 --- a/drivers/bluetooth/Makefile
@@ -296,15 +266,13 @@ index 310da84..775f35d 100644
  
  btmrvl-y			:= btmrvl_main.o
  btmrvl-$(CONFIG_DEBUG_FS)	+= btmrvl_debugfs.o
-@@ -30,5 +32,9 @@ hci_uart-$(CONFIG_BT_HCIUART_BCSP)	+= hci_bcsp.o
+@@ -30,4 +32,8 @@ hci_uart-$(CONFIG_BT_HCIUART_BCSP)	+= hci_bcsp.o
  hci_uart-$(CONFIG_BT_HCIUART_LL)	+= hci_ll.o
  hci_uart-$(CONFIG_BT_HCIUART_ATH3K)	+= hci_ath.o
  hci_uart-$(CONFIG_BT_HCIUART_3WIRE)	+= hci_h5.o
 +hci_uart-$(CONFIG_BT_HCIUART_INTEL)	+= hci_intel.o
 +hci_uart-$(CONFIG_BT_HCIUART_BCM)	+= hci_bcm.o
  hci_uart-objs				:= $(hci_uart-y)
--obj-$(CONFIG_MSM_BT_SLEEP)		+= bluesleep.o
-+obj-$(CONFIG_MSM_BT_SLEEP)             += bluesleep.o
 +
 +ccflags-y += -D__CHECK_ENDIAN__
 diff --git a/drivers/bluetooth/ath3k.c b/drivers/bluetooth/ath3k.c
