@@ -2,14 +2,14 @@ inherit gettext
 
 SUMMARY = "Downloads the Asus ZenWatch 2 /system and /usr/include/android folders and installs them for libhybris"
 LICENSE = "CLOSED"
-SRC_URI = "http://lrsservers.ddns.net/download/devices/asus/sparrow/asteroidos/system.tar.gz"
-SRC_URI[md5sum] = "8fcf9da496125dee0a2e87b1c12f524c"
-SRC_URI[sha256sum] = "9468f9b6e31afbdbf9b23bf0d7c173bd70d883e03282db27586239a08d3e99af"
+SRC_URI = "https://landau.fi/2017/asteroid/wren/system.tar.gz"
+SRC_URI[md5sum] = "4607dff519a501fabb05de59a1355184"
+SRC_URI[sha256sum] = "9cdb2385ede7133029400e3f370f7dfe6593570babc729acce9037369375e833"
 PV = "lollipop"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 INHIBIT_PACKAGE_STRIP = "1"
-COMPATIBLE_MACHINE = "sparrow"
+COMPATIBLE_MACHINE = "wren"
 INSANE_SKIP_${PN} = "already-stripped"
 S = "${WORKDIR}"
 B = "${S}"
@@ -31,7 +31,7 @@ do_install() {
     ln -s system/vendor vendor
 }
 
-# FIXME: QA Issue: Architecture did not match (40 to 164) on /work/sparrow-oe-linux-gnueabi/android/lollipop-r0/packages-split/android-system/system/vendor/firmware/adsp.b00 [arch]
+# FIXME: QA Issue: Architecture did not match (40 to 164) on /work/s parrow-oe-linux-gnueabi/android/lollipop-r0/packages-split/android-system/system/vendor/firmware/adsp.b00 [arch]
 do_package_qa() {
 }
 
