@@ -5,61 +5,11 @@ Subject: [PATCH] bluesleep: Use kernel's HCI events instead of
  /proc/bluetooth/sleep/ write to interface with BlueZ instead of Bluedroid
 
 ---
- drivers/bluetooth/bluesleep.c | 31 +++++++++++++++++++++++++++++++
  drivers/bluetooth/hci_ldisc.c |  4 ++++
  include/net/bluetooth/hci.h   |  1 +
  net/bluetooth/hci_sock.c      |  4 ++++
- 4 files changed, 40 insertions(+)
+ 3 files changed, 9 insertions(+)
 
-diff --git a/drivers/bluetooth/bluesleep.c b/drivers/bluetooth/bluesleep.c
-index d6750ff43270..c64ef06d1b04 100644
---- a/drivers/bluetooth/bluesleep.c
-+++ b/drivers/bluetooth/bluesleep.c
-@@ -54,6 +54,7 @@
- #include <linux/platform_data/msm_serial_hs.h>
- 
- #include <net/bluetooth/bluetooth.h>
-+#include <net/bluetooth/hci_core.h> /* event notifications */
- 
- #define BT_SLEEP_DBG
- #ifndef BT_SLEEP_DBG
-@@ -513,6 +514,36 @@ static void bluesleep_stop(void)
- 	wake_lock_timeout(&bsi->wake_lock, HZ / 8);
- }
- 
-+/**
-+ * Handles HCI device events.
-+ * @param this Not used.
-+ * @param event The event that occurred.
-+ * @param data The HCI device associated with the event.
-+ * @return <code>NOTIFY_DONE</code>.
-+ */
-+void bluesleep_hci_event(unsigned long event)
-+{
-+	switch (event) {
-+	case HCI_DEV_REG:
-+		has_lpm_enabled = true;
-+		bsi->uport = msm_hs_get_uart_port(BT_PORT_ID);
-+		/* if bluetooth started, start bluesleep*/
-+		bluesleep_start();
-+		break;
-+	case HCI_DEV_UNREG:
-+		bluesleep_stop();
-+		/* flush pending works */
-+		flush_delayed_work(&uart_awake_wq);
-+		has_lpm_enabled = false;
-+		bsi->uport = NULL;
-+		/* if bluetooth stopped, stop bluesleep also */
-+		break;
-+	case HCI_DEV_WRITE:
-+		bluesleep_outgoing_data();
-+		break;
-+	}
-+}
-+
- static int bluesleep_write_proc_btwrite(struct file *file,
- 					const char __user * buffer,
- 					size_t count, loff_t * ppos)
 diff --git a/drivers/bluetooth/hci_ldisc.c b/drivers/bluetooth/hci_ldisc.c
 index 5c9a73f02664..f21432799e0f 100644
 --- a/drivers/bluetooth/hci_ldisc.c
