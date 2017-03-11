@@ -17,7 +17,9 @@ SRC_URI = "git://android.googlesource.com/kernel/msm;branch=android-msm-wren-3.1
     file://0001-Remove-unecessary-include-to-axc_PM8226Charger.h.patch \
     file://0001-msm-mdss-mdp-Don-t-use-tracing-features.patch \
     file://0001-Makefile-patch-fixes-ASUS_SW_VER-error.patch \
+    file://0001-Add-bluesleep.c-from-dory-kernel.patch \
     file://0001-Backport-mainline-4.1-Bluetooth-subsystem.patch \
+    file://0002-bluesleep-Use-kernel-s-HCI-events-instead-of-proc-bl.patch \
     file://0001-Use-normal-touch-handling-all-the-time.patch \
     file://0001-Disable-isTouchLocked.patch \
     file://defconfig \
