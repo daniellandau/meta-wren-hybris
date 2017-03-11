@@ -18,6 +18,8 @@ SRC_URI = "git://android.googlesource.com/kernel/msm;branch=android-msm-wren-3.1
     file://0001-msm-mdss-mdp-Don-t-use-tracing-features.patch \
     file://0001-Makefile-patch-fixes-ASUS_SW_VER-error.patch \
     file://0001-Backport-mainline-4.1-Bluetooth-subsystem.patch \
+    file://0001-Use-normal-touch-handling-all-the-time.patch \
+    file://0001-Disable-isTouchLocked.patch \
     file://defconfig \
     file://img_info "
 SRCREV = "3d2fa521411917b5a1683fec42ad2a8e50aee79f"
