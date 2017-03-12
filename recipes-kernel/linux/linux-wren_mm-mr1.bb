@@ -25,6 +25,7 @@ SRC_URI = "git://android.googlesource.com/kernel/msm;branch=android-msm-wren-3.1
     file://0002-bluesleep-Use-kernel-s-HCI-events-instead-of-proc-bl.patch \
     file://0001-Revert-Sparrow-audio-security-patch-for-CVE-2016-206.patch \
     file://0001-Revert-Add-wake_peer-hook-to-MSM-HS-UART-driver.patch \
+    file://0001-Use-generic-dump-function.patch \
     file://0001-Use-normal-touch-handling-all-the-time.patch \
     file://0001-Disable-isTouchLocked.patch \
     file://defconfig \
