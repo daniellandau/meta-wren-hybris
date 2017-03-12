@@ -17,7 +17,7 @@ index adf3f4c0bca6..7dc207a774dc 100644
  /* enable/disable wake-on-bluetooth */
  #define BT_ENABLE_IRQ_WAKE 1
  
-+#define BT_PORT_ID  99
++#define BT_PORT_ID  0
 +
  #define gpio_bt_wake_up_host 48
  #define gpio_host_wake_up_bt 61
